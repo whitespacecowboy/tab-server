@@ -1,48 +1,58 @@
 const PORT = 3000
-browser.tabs.onCreated.addListener( async (tab) => {
+
+browser.tabs.onCreated.addListener(async (tab) => {
 	try {
-		await fetch(`http://localhost:${PORT}/tabCreate`, {
+		await fetch(`http://localhost:${PORT}/tabCreated`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(tab)
+			body: JSON.stringify({
+				id: tab.id,
+				index: tab.index,
+				windowId: tab.windowId,
+				lastAccessed: tab.lastAccessed,
+				groupId: tab.groupId,
+				url: tab.url,
+				title: tab.title,
+				openerTabId: tab.openerTabId
+			})
 		})
 	} catch (err) {
-		throw new Error("Couldn't send tab object to website")
+		throw new Error("Couldn't send onCreated event", err)
 	}
 });
 
-browser.tabs.onRemoved.addListener( async (tabId) => {
+browser.tabs.onRemoved.addListener(async (tabId, removeInfo) => {
 	try {
-		await fetch(`http://localhost:${PORT}/tabDelete`, {
+		await fetch(`http://localhost:${PORT}/tabRemoved`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(tabId)
+			body: JSON.stringify({
+				tabId: tabId,
+				removeInfo: removeInfo
+			})
 		})
 	} catch (err) {
-		throw new Error("Couldn't send tab object to website")
+		throw new Error("Coundn't send onRemoved event", err)
 	}
 });
 
-browser.tabs.onReplaced.addListener( async (tabId) => {
+const args = browser.tabs.onUpdated.addListener(async (tabId, changeInfo, newState) => {
 	try {
-		await fetch(`http://localhost:${PORT}/tabReplaced`, {
+		await fetch(`http://localhost:${PORT}/tabUpdated`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(tabId)
+			body: JSON.stringify({
+				tabId: tabId,
+				changeInfo: changeInfo,
+				newState: newState
+			})
 		})
 	} catch (err) {
-		throw new Error("Couldn't send tab object to website")
+		throw new Error("Cound't send onUpdate event", err)
 	}
-});
-
-browser.tabs.onUpdated.addListener( async (tabId) => {
-	try {
-		await fetch(`http://localhost:${PORT}/tabReplaced`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(tabId)
-		})
-	} catch (err) {
-		throw new Error("Couldn't send tab object to website")
+}
+	,{
+		properties: ["title", "url", "openerTabId", "groupId"]
+		// properties: ["pinned", "title", "url", "status", "openerTabId", "groupId"]
 	}
-});
+);
