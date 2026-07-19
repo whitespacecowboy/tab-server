@@ -2,7 +2,7 @@ const PORT = 3000
 
 browser.tabs.onCreated.addListener(async (tab) => {
 	try {
-		await fetch(`http://localhost:${PORT}/tabCreated`, {
+		await fetch(`http://localhost:${PORT}/api/tabs/tabCreated`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -23,7 +23,7 @@ browser.tabs.onCreated.addListener(async (tab) => {
 
 browser.tabs.onRemoved.addListener(async (tabId, removeInfo) => {
 	try {
-		await fetch(`http://localhost:${PORT}/tabRemoved`, {
+		await fetch(`http://localhost:${PORT}/api/tabs/tabRemoved`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -36,9 +36,9 @@ browser.tabs.onRemoved.addListener(async (tabId, removeInfo) => {
 	}
 });
 
-const args = browser.tabs.onUpdated.addListener(async (tabId, changeInfo, newState) => {
+browser.tabs.onUpdated.addListener(async (tabId, changeInfo, newState) => {
 	try {
-		await fetch(`http://localhost:${PORT}/tabUpdated`, {
+		await fetch(`http://localhost:${PORT}/api/tabs/tabUpdated`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
