@@ -5,16 +5,22 @@ const tabCreatedListener = (PORT) => {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
-					tab
-				// 	id: tab.id,
-				// 	index: tab.index,
-				// 	windowId: tab.windowId,
-				// 	lastAccessed: tab.lastAccessed,
-				// 	groupId: tab.groupId,
-				// 	url: tab.url,
-					// title: tab.title,
-				// 	openerTabId: tab.openerTabId,
-				// 	status: tab.status,
+					id: tab.id,
+					index: tab.index,
+					windowId: tab.windowId,
+					lastAccessed: tab.lastAccessed,
+					groupId: tab.groupId,
+					url: tab.url,
+					title: tab.title,
+					openerTabId: tab.openerTabId,
+					status: tab.status,
+					pinned: tab.pinned,
+					active: tab.active,
+					attention: tab.attention,
+					successorTabId: tab.successorTabId,
+					hidden: tab.hidden,
+					discarded: tab.hidden,
+					incognito: tab.incognito
 				})
 			})
 		} catch (err) {
