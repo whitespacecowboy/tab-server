@@ -1,77 +1,84 @@
-# React + TypeScript + Vite
+# Tab Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A better way to organize your browser tabs.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Tab Manager is a MERN stack project that organizes your browser tabs into a **tree structure**, so you can visually map out how your tabs relate to each other and keep track of your line of thought instead of losing it in a wall of flat tabs.
 
-## React Compiler
+Tabs can be linked as **parents, children, and siblings**, grouped into **folders**, and rearranged freely. You can also create **multiple workspaces**, each with its own independent tab tree — handy for separating projects, research threads, or contexts.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## How It Works
 
-Note: This will impact Vite dev & build performances.
+- **Frontend** — built with React (+ CSS), renders your tabs as an indented tree view (think the Linux `tree` command, not a node-graph canvas)
+- **Backend** — Node.js + Express + MongoDB, stores your tab trees and workspaces
+- **Browser Extension** — a companion extension that talks to the website, capturing your open tabs and syncing them into the tree
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🌳 Tree-structured tab organization (parent/child/sibling relationships)
+- 📁 Folders to group related tabs
+- 🖱️ Drag-and-drop rearranging of the tree
+- 🗂️ Multiple workspaces, each with its own tab tree
+- 🔌 Browser extension for capturing and syncing tabs
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **MongoDB** — database
+- **Express** — backend framework
+- **React** — frontend library
+- **Node.js** — runtime
+- **Browser Extension API** — tab capture and syncing
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
 
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+Tab-Manager/
+├── client/      # React frontend
+├── server/      # Express + MongoDB backend
+├── extension/   # Browser extension
+└── shared/      # Shared types between client and server
 ```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- MongoDB (local instance or a connection URI)
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/whitespacecowboy/Tab-Manager.git
+cd Tab-Manager
+
+# Install dependencies
+npm install
+```
+
+### Running the App
+
+```bash
+# Start the backend
+cd server
+npm run dev
+
+# Start the frontend
+cd client
+npm run dev
+```
+
+Then load the extension:
+1. Go to `about:debugging#/runtime/this-firefox`
+2. Click Load Temporary Add-on...
+3. Just click on any file from Tab-Manager/extension/
+
+## Status
+
+🚧 This project is a work in progress, built as part of a MERN stack course.
+
+## License
+
+MIT
