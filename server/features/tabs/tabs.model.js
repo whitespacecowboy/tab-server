@@ -1,15 +1,5 @@
 import mongoose from "mongoose"
 
-async function connectDbTab() {
-	try {
-		await mongoose.connect('mongodb://localhost:27017/tab-manger')
-	} catch (err) {
-		console.error(err)
-	}
-}
-
-connectDbTab()
-
 const tabsSchema = new mongoose.Schema({
 	id: { type: Number, required: true },
 	index: { type: Number, required: true },
