@@ -19,4 +19,5 @@ const tabsSchema = new mongoose.Schema({
 	discarded: { type: Boolean }
 }) 
 
-export const Tabs =  mongoose.model('tabs-info', tabsSchema)
+const Tabs = mongoose.model('tabs-info', tabsSchema)
+export default Tabs
