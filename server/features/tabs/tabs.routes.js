@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { handleTabCreated, handleTabRemoved, handleTabUpdated } from './tabs.controller.ts';
+import { handleTabCreated, handleTabRemoved, handleTabUpdated } from './tabs.controller.js';
 
 const router = Router();
 router.post('/tabCreated', handleTabCreated);

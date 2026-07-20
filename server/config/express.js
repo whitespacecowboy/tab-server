@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import tabsRouter from './features/tabs/tabs.routes.ts';
+import tabsRouter from '../features/tabs/tabs.routes.js';
 
 const app = express();
 app.use(express.json());
