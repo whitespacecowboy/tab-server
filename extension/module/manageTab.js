@@ -1,0 +1,6 @@
+// tabs.remove()
+// tabs.create()
+// tabs.getAllInWindow()
+// tabs.query()
+// tabs.reload()
+// tabs.ungroup()
