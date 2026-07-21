@@ -47,7 +47,7 @@ const removeTabEntry = async (removeInfo) => {
 	if (status.acknowledged && status.deletedCount === 1) {
 		console.log("Tab entry removed successfully", removeInfo.id);
 	} else {
-		console.warn("Tab entry wasn't removed", removeInfo.id);
+		console.warn("No tab entry was found for", removeInfo.id);
 	}
 };
 
@@ -60,7 +60,7 @@ const readTabEntry = async (searchCondition) => {
 		return;
 	}
 	if (output.length !== 0) {
-		console.log(output);
+		return output
 	} else {
 		console.log("tab-info table was empty");
 	}
