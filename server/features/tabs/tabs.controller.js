@@ -1,15 +1,16 @@
+import { createTabEntry, updateTabEntry, removeTabEntry } from "./tabs.repository.js"
+
 export const handleTabCreated = (req, res) => {
-  console.log(req.body);
-  // TODO: save to DB via tabs.model.js
+  createTabEntry(req.body)
   res.status(200).json({ message: 'Tab created event received' });
 };
 
 export const handleTabRemoved = (req, res) => {
-  console.log(req.body);
+  removeTabEntry(req.body)
   res.status(200).json({ message: 'Tab removed event received' });
 };
 
 export const handleTabUpdated = (req, res) => {
-  console.log(req.body);
+  updateTabEntry(req.body)
   res.status(200).json({ message: 'Tab updated event received' });
 };
