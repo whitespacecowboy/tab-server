@@ -1,6 +1,6 @@
 import Tabs from "./tabs.model.js";
 
-export const createTabEntry = async (tabObj) => {
+const createTabEntry = async (tabObj) => {
 	let status;
 	try {
 		status = await new Tabs(tabObj).save();
@@ -15,7 +15,7 @@ export const createTabEntry = async (tabObj) => {
 	}
 };
 
-export const updateTabEntry = async (updatedInfo) => {
+const updateTabEntry = async (updatedInfo) => {
 	// TODO: This function is invoked way too many times because of how onUpdated event listener works. Fix that later
 	let status;
 	try {
@@ -36,7 +36,7 @@ export const updateTabEntry = async (updatedInfo) => {
 	}
 };
 
-export const removeTabEntry = async (removeInfo) => {
+const removeTabEntry = async (removeInfo) => {
 	let status;
 	try {
 		status = await Tabs.deleteOne({ id: removeInfo.id });
@@ -54,7 +54,7 @@ export const removeTabEntry = async (removeInfo) => {
 const readTabEntry = async (searchCondition) => {
 	let output;
 	try {
-		output = Tabs.find(searchCondition)
+		output = await Tabs.find(searchCondition)
 	} catch (error) {
 		console.error(new Error("Couldn't read tab entries"), { cause: error });
 		return;
@@ -66,7 +66,7 @@ const readTabEntry = async (searchCondition) => {
 	}
 };
 
-export const deleteAllTabEntries = async () => {
+const deleteAllTabEntries = async () => {
 	let status;
 	try {
 		status = await Tabs.deleteMany({});
@@ -80,3 +80,10 @@ export const deleteAllTabEntries = async () => {
 		console.warn("tab-info was already empty");
 	}
 };
+
+export {
+	removeTabEntry,
+	updateTabEntry,
+	createTabEntry,
+	readTabEntry
+}
