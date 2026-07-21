@@ -36,7 +36,7 @@ const tabRemovedListener = (PORT) => {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
-					tabId: tabId,
+					id: tabId,
 					removeInfo: removeInfo
 				})
 			})
@@ -53,7 +53,7 @@ const tabUpdatedListener = (PORT) => {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
-					tabId: tabId,
+					id: tabId,
 					changeInfo: changeInfo,
 				})
 			})
