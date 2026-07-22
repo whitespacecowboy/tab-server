@@ -8,9 +8,10 @@ const PORT_DB = 27017;
 async function main() {
 	try {
 		await connectDB(PORT_DB)
-		// await clear()
+		await clear()
 		app.listen(PORT_EXPRESS, () => {
 			console.info(`listening on http://localhost:${PORT_EXPRESS}/`);
+			console.info(`listening on http://localhost:${PORT_EXPRESS}/api/tabs/show`);
 		})
 	} catch (error) {
 		console.error(error)
@@ -18,3 +19,4 @@ async function main() {
 }
 
 main()
+
