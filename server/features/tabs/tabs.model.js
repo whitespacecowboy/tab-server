@@ -9,14 +9,14 @@ const tabsSchema = new mongoose.Schema({
 	url: { type: String, required: true },
 	title: { type: String, required: true },
 	openerTabId: { type: Number },
-	incognito: { type: Boolean },
+	// incognito: { type: Boolean },
 	status: { type: String },
-	pinned: { type: Boolean },
-	active: { type: Boolean },
-	attention: { type: Boolean },
+	// pinned: { type: Boolean },
+	// active: { type: Boolean },
+	// attention: { type: Boolean },
 	successorTabId: { type: Number },
-	hidden: { type: Boolean },
-	discarded: { type: Boolean }
+	// hidden: { type: Boolean },
+	// discarded: { type: Boolean }
 }) 
 
 const Tabs = mongoose.model('tabs-info', tabsSchema)
