@@ -16,7 +16,8 @@ const createTabEntry = async (tabObj) => {
 };
 
 const updateTabEntry = async (updatedInfo) => {
-	// TODO: This function is invoked way too many times because of how onUpdated event listener works. Fix that later
+	// TODO: This function is invoked way too many times because of how
+	// onUpdated event listener works. Fix that later
 	let status;
 	try {
 		status = await Tabs.updateOne(
@@ -59,11 +60,7 @@ const readTabEntry = async (searchCondition) => {
 		console.error(new Error("Couldn't read tab entries"), { cause: error });
 		return;
 	}
-	if (output.length !== 0) {
-		return output
-	} else {
-		console.log("tab-info table was empty");
-	}
+	return output
 };
 
 const deleteAllTabEntries = async () => {
@@ -85,5 +82,6 @@ export {
 	removeTabEntry,
 	updateTabEntry,
 	createTabEntry,
-	readTabEntry
+	readTabEntry,
+	deleteAllTabEntries
 }
