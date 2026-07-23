@@ -1,4 +1,7 @@
-const tabCreatedListener = (PORT) => {
+import { getAllTabs } from "./manageTab.js";
+const PORT = 3000
+
+const tabCreatedListener = () => {
 	browser.tabs.onCreated.addListener(async (tab) => {
 		try {
 			await fetch(`http://localhost:${PORT}/api/tabs/tabCreated`, {
@@ -21,7 +24,7 @@ const tabCreatedListener = (PORT) => {
 	});
 }
 
-const tabRemovedListener = (PORT) => {
+const tabRemovedListener = () => {
 	browser.tabs.onRemoved.addListener(async (tabId, removeInfo) => {
 		try {
 			await fetch(`http://localhost:${PORT}/api/tabs/tabRemoved`, {
@@ -38,7 +41,7 @@ const tabRemovedListener = (PORT) => {
 	});
 }
 
-const tabUpdatedListener = (PORT) => {
+const tabUpdatedListener = () => {
 	browser.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 		try {
 			await fetch(`http://localhost:${PORT}/api/tabs/tabUpdated`, {
@@ -59,8 +62,22 @@ const tabUpdatedListener = (PORT) => {
 	);
 }
 
+const onInstall = () => {
+	browser.runtime.onInstalled.addListener(() => {
+		getAllTabs(PORT);
+	});
+}
+
+const onStartup = () => {
+	browser.runtime.onStartup.addListener(() => {
+		getAllTabs(PORT);
+	});
+}
+
 export {
 	tabCreatedListener,
 	tabRemovedListener,
-	tabUpdatedListener
+	tabUpdatedListener,
+	onStartup,
+	onInstall
 }

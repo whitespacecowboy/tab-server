@@ -1,6 +1,8 @@
-import { tabCreatedListener, tabUpdatedListener, tabRemovedListener } from './module/listner.js'
-const PORT = 3000
+import { tabCreatedListener, tabUpdatedListener, tabRemovedListener, onInstall, onStartup } from './module/listner.js'
 
-tabRemovedListener(PORT)
-tabCreatedListener(PORT)
-tabUpdatedListener(PORT)
+
+tabRemovedListener()
+tabCreatedListener()
+tabUpdatedListener()
+onInstall()
+onStartup()

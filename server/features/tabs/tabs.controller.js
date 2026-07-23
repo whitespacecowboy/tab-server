@@ -1,5 +1,5 @@
-import { createTabEntry, updateTabEntry, removeTabEntry } from "./tabs.repository.js"
-import { constructTree } from './tabs.service.js'
+import { createTabEntry, createManyTabEntry, updateTabEntry, removeTabEntry } from "./tabs.repository.js"
+import { constructTree, sync } from './tabs.service.js'
 
 export const handleTabCreated = async (req, res) => {
 	await createTabEntry(req.body)
@@ -16,7 +16,12 @@ export const handleTabUpdated = async (req, res) => {
 	res.status(200).json({ message: 'Tab updated event received' });
 };
 
-export const showTree = async (req, res) => {
+export const handleShowTree = async (_, res) => {
 	const output = await constructTree()
 	res.status(200).json(output);
+};
+
+export const handleGetAll = async (req, res) => {
+	await sync(req.body)
+	res.status(200).json({ message: 'Tabs synced successfully'});
 };

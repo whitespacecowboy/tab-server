@@ -6,5 +6,4 @@ export default async function connectDatabase(PORT_DB) {
 	} catch (err) {
 		throw new Error("Connecting to database failed\n", { cause: err.message })
 	}
-	console.log("Connected to MongoDB ");
 }

@@ -13,6 +13,15 @@ const createTabEntry = async (tabObj) => {
 	}
 };
 
+const createManyTabEntry = async (arr) => {
+	if (arr.length === 0) {
+		return 0
+	}
+	for (let entry of arr) {
+		createTabEntry(entry)
+	}
+};
+
 const updateTabEntry = async (updatedInfo) => {
 	// TODO: This function is invoked way too many times because of how
 	// onUpdated event listener works. Fix that later
@@ -77,5 +86,6 @@ export {
 	updateTabEntry,
 	createTabEntry,
 	readTabEntry,
-	deleteAllTabEntries
+	deleteAllTabEntries,
+	createManyTabEntry 
 }
