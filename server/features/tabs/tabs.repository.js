@@ -8,9 +8,7 @@ const createTabEntry = async (tabObj) => {
 		console.error(new Error("Couldn't insert tab entry"), { cause: error });
 		return;
 	}
-	if (status?._id) {
-		console.log("Tab entry added successfully", tabObj.id);
-	} else {
+	if (!status?._id) {
 		console.warn("Couldn't insert tab entry", tabObj.id);
 	}
 };
@@ -31,8 +29,8 @@ const updateTabEntry = async (updatedInfo) => {
 	if (status.acknowledged) {
 		if (status.matchedCount === 0) {
 			console.warn("Couldn't update, no match found", updatedInfo.id);
-		} else if (status.modifiedCount === 1) {
-			console.log("Tab entry updated successfully", updatedInfo.id);
+		} else if (!status.modifiedCount === 1) {
+			console.warn("Tab entry didn't update", updatedInfo.id);
 		}
 	}
 };
@@ -45,9 +43,7 @@ const removeTabEntry = async (removeInfo) => {
 		console.error(new Error("Couldn't remove tab entry"), { cause: error });
 		return;
 	}
-	if (status.acknowledged && status.deletedCount === 1) {
-		console.log("Tab entry removed successfully", removeInfo.id);
-	} else {
+	if (!(status.acknowledged && status.deletedCount === 1)) {
 		console.warn("No tab entry was found for", removeInfo.id);
 	}
 };
@@ -68,13 +64,11 @@ const deleteAllTabEntries = async () => {
 	try {
 		status = await Tabs.deleteMany({});
 	} catch (error) {
-		console.error(new Error("Couldn't delete all table entries"), { cause: error });
+		console.error(new Error("Couldn't delete table entries"), { cause: error });
 		return;
 	}
-	if (status.acknowledged && status.deletedCount > 0) {
-		console.log("tab-info is now empty");
-	} else {
-		console.warn("tab-info was already empty");
+	if ( !(status.acknowledged && status.deletedCount > 0) ) {
+		console.warn("tab-info table is already empty");
 	}
 };
 
